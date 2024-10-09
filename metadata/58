@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#59 Poliwag",
+  "description": "Its newly grown legs prevent it from running. It appears to prefer swimming over trying to stand. LV.13 #60", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/59.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,7 +9,7 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Common"
     },
     {
       "trait_type": "Type", 
@@ -17,11 +17,11 @@
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "40"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "0"
     },
     {
       "trait_type": "Author", 

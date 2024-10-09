@@ -1,0 +1,31 @@
+{
+  "name": "#37 Nidorino",
+  "description": "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom. LV.25 #33", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/37.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Grass"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "60"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "1"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

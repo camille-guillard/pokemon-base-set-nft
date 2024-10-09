@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#28 Growlithe",
+  "description": "Very protective of its territory. It will bark and bite to repel intruders from its space. LV.18 #58", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/28.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,19 +9,19 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Fire"
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "60"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "0"
     },
     {
       "trait_type": "Author", 

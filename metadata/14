@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#15 Venusaur",
+  "description": "This plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight. LV.67 #3", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/15.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -13,7 +13,7 @@
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Grass"
     },
     {
       "trait_type": "HP", 
@@ -25,7 +25,7 @@
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Mitsuhiro Arita"
     }
   ]
 }

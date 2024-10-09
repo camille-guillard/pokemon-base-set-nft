@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#34 Machoke",
+  "description": "Its muscular body is so powerful that it must wear a power-save belt to help regulate its motions. LV.40 #67", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/34.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,19 +9,19 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Fighting"
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "80"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 

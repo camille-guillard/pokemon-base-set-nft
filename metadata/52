@@ -1,0 +1,31 @@
+{
+  "name": "#53 Magnemite",
+  "description": "Uses anti-gravity to stay suspended. Appears without warning and uses attacks like Thunder Wave. LV.13 #81", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/53.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Electric"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "40"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

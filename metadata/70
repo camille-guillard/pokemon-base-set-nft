@@ -1,0 +1,19 @@
+{
+  "name": "#71 Computer Search",
+  "description": "Discard 2 of the other cards from your hand in order to search your deck for any card and put it into your hand. Shuffle your deck afterward.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/71.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

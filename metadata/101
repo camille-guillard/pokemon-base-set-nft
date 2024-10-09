@@ -1,0 +1,22 @@
+{
+  "name": "#102 Water Energy",
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/102.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Energy"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Water"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

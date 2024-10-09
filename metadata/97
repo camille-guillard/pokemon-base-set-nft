@@ -1,0 +1,22 @@
+{
+  "name": "#98 Fire Energy",
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/98.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Energy"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fire"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

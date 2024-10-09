@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#12 Poliwrath",
+  "description": "An adept swimmer at both the front crawl and breaststroke. Easily overtakes the best human swimmers. LV.48 #62", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/13.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -17,7 +17,7 @@
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "90"
     },
     {
       "trait_type": "Stage", 

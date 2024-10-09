@@ -1,0 +1,31 @@
+{
+  "name": "#48 Doduo",
+  "description": "A bird that makes up for its poor flying with its fast foot speed. Leaves giant footprints. LV.10 #84", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/48.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Normal"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "50"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

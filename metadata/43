@@ -1,0 +1,31 @@
+{
+  "name": "#44 Bulbasaur",
+  "description": "A strange seed was planted on its back at birth. Thus, a plant sprouted and now grows with this Pokémon. LV.13 #1", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/44.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Grass"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "40"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

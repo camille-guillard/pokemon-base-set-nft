@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
 const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1;
+const ETHERSCAN_SEPOLIA_API_KEY = process.env.ETHERSCAN_SEPOLIA_API_KEY;
 
 module.exports = {
     defaultNetwork: "amoy",
@@ -38,5 +39,13 @@ module.exports = {
     },
     mocha: {
       timeout: 40000
-    }
+    },
+    etherscan: {
+      apiKey: {
+        sepolia: ETHERSCAN_SEPOLIA_API_KEY
+      }
+    },
+    sourcify: {
+      enabled: true
+    }    
   }

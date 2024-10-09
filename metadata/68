@@ -1,0 +1,31 @@
+{
+  "name": "#69 Weedle",
+  "description": "Often found in forests and grasslands. It has a sharp, toxic barb of around two inches on top of its head. LV.12 #13", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/69.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Grass"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "40"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

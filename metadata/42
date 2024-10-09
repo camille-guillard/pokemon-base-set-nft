@@ -1,7 +1,7 @@
 {
-  "name": "#1 Alakazam",
-  "description": "Its brain can outperform a supercomputer. Its intelligence quotien is said to be 500. LV.42 #65", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "name": "#43 Abra",
+  "description": "Using its ability to read minds, it will identify impending danger and teleport to safety. LV.10 #43", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/43.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,7 +9,7 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Common"
     },
     {
       "trait_type": "Type", 
@@ -17,15 +17,15 @@
     },
     {
       "trait_type": "HP", 
-      "value": "80"
+      "value": "30"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "0"
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Mitsuhiro Arita"
     }
   ]
 }

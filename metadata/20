@@ -1,0 +1,31 @@
+{
+  "name": "#21 Electrode",
+  "description": "It stores electrical energy under very high pressure. It often explodes with little or no provocation. LV.40 #101", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/21.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Electric"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "80"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "1"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

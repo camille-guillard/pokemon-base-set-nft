@@ -1,0 +1,31 @@
+{
+  "name": "#52 Machop",
+  "description": "Loves to build its muscles. It trains in all styles of martial arts to become even stronger. LV.20 #66", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/52.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fighting"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "50"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

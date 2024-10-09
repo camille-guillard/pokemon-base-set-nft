@@ -1,0 +1,19 @@
+{
+  "name": "#85 Pokémon Center",
+  "description": "Remove all damage counters from all of your own Pokémon with damage counters on them, then discard all Energy cards attached to those Pokémon.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/85.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

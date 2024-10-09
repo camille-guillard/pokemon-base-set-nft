@@ -1,0 +1,19 @@
+{
+  "name": "#82 Full Heal",
+  "description": "Your Active Pokémon is no longer Asleep, Confused, Paralyzed, or Poisoned.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/82.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#42 Wartortle",
+  "description": "Often hides in water to stalk unwary prey. When swimming quickly, it moves its ears to maintain balance. LV.22 #8", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/42.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,7 +9,7 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
@@ -17,11 +17,11 @@
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "70"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 

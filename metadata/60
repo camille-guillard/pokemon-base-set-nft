@@ -1,0 +1,31 @@
+{
+  "name": "#61 Rattata",
+  "description": "Bites anything when it attacks. Small and very quick, it is a common sight in many places. LV.9 #19", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/61.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Normal"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "30"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

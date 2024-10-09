@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#30 Ivysaur",
+  "description": "When the bulb on its back grows large, the Pokémon seems to lose the ability to stand on its hind legs. LV.20 #2", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/30.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,19 +9,19 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Grass"
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "60"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 

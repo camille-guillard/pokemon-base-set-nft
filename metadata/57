@@ -1,0 +1,31 @@
+{
+  "name": "#58 Pikachu",
+  "description": "When several of these Pokémon gather, their electricity can cause lightning storms. LV.12 #25", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/58.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Electric"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "40"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

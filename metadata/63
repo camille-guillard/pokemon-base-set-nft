@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#64 Starmie",
+  "description": "Its central core glows with the seven colors of the rainbow. Some people value this core as a gem. LV.28 #121", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/64.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,7 +9,7 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Common"
     },
     {
       "trait_type": "Type", 
@@ -17,15 +17,15 @@
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "60"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Keiji Kinebuchi"
     }
   ]
 }

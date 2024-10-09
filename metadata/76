@@ -1,0 +1,19 @@
+{
+  "name": "#77 Pokémon Trader",
+  "description": "Trade 1 of the Basic Pokémon or Evolution cards in your hand for 1 of the Basic Pokémon or Evolution cards from your deck. Show both cards to your opponent. Shuffle your deck afterward.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/77.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Ken Sugimori"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "#79 Super Energy Removal",
+  "description": "Discard 1 Energy card attached to 1 of your own Pokémon in order to choose 1 of your opponent's Pokémon and up to 2 Energy cards attached to it. Discard those Energy cards.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/79.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

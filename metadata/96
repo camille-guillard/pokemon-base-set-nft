@@ -1,0 +1,22 @@
+{
+  "name": "#97 Fighting Energy",
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/97.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Energy"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fighting"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

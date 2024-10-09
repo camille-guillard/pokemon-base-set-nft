@@ -1,0 +1,19 @@
+{
+  "name": "#76 Pokémon Breeder",
+  "description": "Put a Stage 2 Evolution card from your hand on the matching Basic Pokémon. You can only play this card when you would be allowed to evolve that Pokémon anyway.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/76.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Ken Sugimori"
+    }
+  ]
+}

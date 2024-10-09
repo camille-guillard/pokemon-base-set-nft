@@ -1,0 +1,15 @@
+{
+  "name": "#91 Bill",
+  "description": "Draw 2 cards.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/91.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Ken Sugimori"
+    }
+  ]
+}

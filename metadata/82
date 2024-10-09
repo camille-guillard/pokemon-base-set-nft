@@ -1,0 +1,19 @@
+{
+  "name": "#83 Maintenance",
+  "description": "Shuffle 2 of the other cards from your hand into your deck in order to draw a card.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/83.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "#33 Kakuna",
+  "description": "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators. LV.23 #14", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/33.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Grass"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "80"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "1"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "name": "#1 Alakazam",
-  "description": "Its brain can outperform a supercomputer. Its intelligence quotien is said to be 500. LV.42 #65", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "name": "#29 Haunter",
+  "description": "Because of its ability to slip through block walls, it is said to be from another dimension. LV.22 #93", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/29.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,7 +9,7 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
@@ -17,15 +17,15 @@
     },
     {
       "trait_type": "HP", 
-      "value": "80"
+      "value": "60"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Keiji Kinebuchi"
     }
   ]
 }

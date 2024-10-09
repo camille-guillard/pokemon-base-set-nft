@@ -1,0 +1,31 @@
+{
+  "name": "#46 Charmander",
+  "description": "Obviously prefers hot places. If it gets caught in the rain, steam is said to spout from the tip of its tail. LV.10 #4", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/46.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fire"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "50"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Mitsuhiro Arita"
+    }
+  ]
+}

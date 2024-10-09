@@ -1,7 +1,7 @@
 {
-  "name": "#1 Alakazam",
-  "description": "Its brain can outperform a supercomputer. Its intelligence quotien is said to be 500. LV.42 #65", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "name": "#24 Charmeleon",
+  "description": "When it swings its burning tail, it raises the temperature to unbearably high levels. LV.32 #5", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/24.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,11 +9,11 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
-      "value": "Psychic"
+      "value": "Fire"
     },
     {
       "trait_type": "HP", 
@@ -21,11 +21,11 @@
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Mitsuhiro Arita"
     }
   ]
 }

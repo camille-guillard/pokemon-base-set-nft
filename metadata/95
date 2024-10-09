@@ -1,0 +1,23 @@
+{
+  "name": "#96 Double Colorless Energy",
+  "description": "Provides two Colorless energy. Doesn't count as a basic Energy card.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/96.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Energy"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "All"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

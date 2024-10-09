@@ -1,0 +1,19 @@
+{
+  "name": "#94 Potion",
+  "description": "Remove up to 2 damage counters from 1 of your Pokémon.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/94.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

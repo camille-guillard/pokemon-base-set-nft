@@ -1,0 +1,19 @@
+{
+  "name": "#73 Impostor Professor Oak",
+  "description": "Your opponent shuffles his or her hand into his or her deck, then draws 7 cards.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/73.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Ken Sugimori"
+    }
+  ]
+}

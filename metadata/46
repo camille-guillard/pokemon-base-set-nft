@@ -1,0 +1,31 @@
+{
+  "name": "#47 Diglett",
+  "description": "Lives about three feet underground, where it feeds on plant roots. It sometimes appears above ground. LV.8 #50", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/47.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fighting"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "30"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "0"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

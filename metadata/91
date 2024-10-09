@@ -1,0 +1,19 @@
+{
+  "name": "#92 Energy Removal",
+  "description": "Choose 1 Energy card attached to 1 of your opponent's Pokémon and discard it.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/92.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

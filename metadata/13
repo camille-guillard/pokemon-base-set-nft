@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#14 Raichu",
+  "description": "Its long tail serves as a ground to protect itself from its own high-voltage power. LV.40 #26", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/14.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -13,15 +13,15 @@
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Electric"
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "80"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 

@@ -1,0 +1,19 @@
+{
+  "name": "#78 Scoop Up",
+  "description": "Choose 1 of your Pokémon in play and return its Basic Pokémon card to your hand. (Discard all cards attached to that card.)", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/78.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

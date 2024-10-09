@@ -1,0 +1,19 @@
+{
+  "name": "#95 Switch",
+  "description": "Switch 1 of your Benched Pokémon with your Active Pokémon.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/95.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

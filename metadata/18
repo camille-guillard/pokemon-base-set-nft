@@ -1,0 +1,31 @@
+{
+  "name": "#19 Dugtrio",
+  "description": "A team of Diglett triplets. It triggers huge earthquakes by burrowing 60 miles underground. LV.36 #151", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/19.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Pokémon"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "Fighting"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "70"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "1"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

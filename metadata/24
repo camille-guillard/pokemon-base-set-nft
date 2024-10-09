@@ -1,7 +1,7 @@
 {
-  "name": "#1 Alakazam",
-  "description": "Its brain can outperform a supercomputer. Its intelligence quotien is said to be 500. LV.42 #65", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "name": "#25 Dewgong",
+  "description": "Stores thermal energy in its body. Swims at a steady 8 knots even in intensely cold waters. LV.42 #87", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/25.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,11 +9,11 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Uncommon"
     },
     {
       "trait_type": "Type", 
-      "value": "Psychic"
+      "value": "Wire"
     },
     {
       "trait_type": "HP", 
@@ -21,11 +21,11 @@
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "1"
     },
     {
       "trait_type": "Author", 
-      "value": "Ken Sugimori"
+      "value": "Mitsuhiro Arita"
     }
   ]
 }

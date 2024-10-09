@@ -1,0 +1,19 @@
+{
+  "name": "#75 Lass",
+  "description": "You and your opponent show each other your hands, then shuffle all the Trainer cards from your hands into your decks.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/75.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Ken Sugimori"
+    }
+  ]
+}

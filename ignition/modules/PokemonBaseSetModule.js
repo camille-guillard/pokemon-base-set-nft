@@ -3,9 +3,11 @@ const { networkConfig } = require("./helper-config");
 const { network } = require("hardhat");
 const { verifyContract } = require("../../utils/verifyContract");
 
-module.exports = buildModule("MyNFTModule", (m) => {
+module.exports = buildModule("PokemonBaseSetModule", (m) => {
 
   const chainId = network.config.chainId;
+
+  console.log("chainID : " + chainId);
 
   const args = [
     networkConfig[chainId]["_nftURI"],
@@ -15,13 +17,7 @@ module.exports = buildModule("MyNFTModule", (m) => {
     networkConfig[chainId]["_publicSalesStartTime"]
   ]
 
-  const myNFTContract = m.contract("MyNFT", args);
+  const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis7" });
 
-  console.log("Contract deployed address : " + myNFTContract.address);
-
-  if(!localChains.include(network.name) && process.env.ALCHEMY_API_KEY) {
-    verifyContract(myNFTContract.address, args)
-  }
-
-  return { myNFTContract };
+  return { pokemonBaseSetContract };
 });

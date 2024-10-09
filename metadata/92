@@ -1,0 +1,19 @@
+{
+  "name": "#93 Gust of Wind",
+  "description": "Choose 1 of your opponent's Benched Pokémon and switch it with his or her Active Pokémon.", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/93.jpg",
+  "attributes": [
+    {
+      "trait_type": "Category", 
+      "value": "Trainer"
+    },
+    {
+      "trait_type": "Rarity", 
+      "value": "Common"
+    },
+    {
+      "trait_type": "Author", 
+      "value": "Keiji Kinebuchi"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "name": "#2 Blastoise",
-  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
-  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/2.jpg",
+  "name": "#60 Ponyta",
+  "description": "Its hooves are 10 times harder than diamonds. It can trample anything flat in moments. LV.10 #77", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/60.jpg",
   "attributes": [
     {
       "trait_type": "Category", 
@@ -9,19 +9,19 @@
     },
     {
       "trait_type": "Rarity", 
-      "value": "Holo"
+      "value": "Common"
     },
     {
       "trait_type": "Type", 
-      "value": "Water"
+      "value": "Fire"
     },
     {
       "trait_type": "HP", 
-      "value": "100"
+      "value": "40"
     },
     {
       "trait_type": "Stage", 
-      "value": "2"
+      "value": "0"
     },
     {
       "trait_type": "Author", 
