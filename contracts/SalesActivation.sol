@@ -8,10 +8,14 @@ contract SalesActivation is Ownable {
     uint256 public preSalesEndTime;
     uint256 public publicSalesStartTime;
 
+    error PreSalesNotStarted();
+    error PublicSalesNotStarted();
+    error StartTimeLaterThanEndTime();
+
     constructor(
         uint256 _preSalesStartTime,
         uint256 _preSalesEndTime,
-        uint256 _publicSalesStartTime,
+        uint256 _publicSalesStartTime, 
         address _ownerAddress
     ) Ownable(_ownerAddress) {
             preSalesStartTime = _preSalesStartTime;
@@ -19,17 +23,17 @@ contract SalesActivation is Ownable {
             publicSalesStartTime = _publicSalesStartTime;
     }
 
-    modifier isPresalesActive() {
-        require(isPresalesActivated(), "presales not started");
+    modifier isPreSalesActive() {
+        require(isPreSalesActivated(), PreSalesNotStarted());
         _;
     }
 
     modifier isPublicSalesActive() {
-        require(isPublicSalesActivated(), "public sales not started");
+        require(isPublicSalesActivated(), PublicSalesNotStarted());
         _;
     }
 
-    function isPresalesActivated() public view returns(bool) {
+    function isPreSalesActivated() public view returns(bool) {
         return preSalesStartTime > 0 && preSalesEndTime > 0 && block.timestamp >= preSalesStartTime  && block.timestamp <= preSalesEndTime;
     }
 
@@ -42,7 +46,7 @@ contract SalesActivation is Ownable {
     }
 
     function setPresaleTime(uint256 _preSalesStartTime, uint256 _preSalesEndTime) external onlyOwner {
-        require(preSalesStartTime < preSalesEndTime, "endtime should be later than starttime");
+        require(preSalesStartTime < preSalesEndTime, StartTimeLaterThanEndTime());
         preSalesStartTime = _preSalesStartTime;
         preSalesEndTime = _preSalesEndTime;
     }

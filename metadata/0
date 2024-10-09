@@ -1,0 +1,19 @@
+{
+  "name": "#1 Alakazam",
+  "description": "Its brain can outperform a supercomputer. Its intelligence quotien is said to be 500. LV.42 #65", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "attributes": [
+    {
+      "trait_type": "Type", 
+      "value": "Psychic"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "80"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "3"
+    }
+  ]
+}

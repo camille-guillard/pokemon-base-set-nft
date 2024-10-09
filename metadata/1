@@ -1,0 +1,19 @@
+{
+  "name": "#1 Blastoise",
+  "description": "A brutal Pokémon with pressurized water jets on its shell. They are used for high-speed tackles. LV.52 #9", 
+  "image": "https://www.pokecardex.com/assets/images/sets/BS/US/HD/1.jpg",
+  "attributes": [
+    {
+      "trait_type": "Type", 
+      "value": "Water"
+    },
+    {
+      "trait_type": "HP", 
+      "value": "100"
+    },
+    {
+      "trait_type": "Stage", 
+      "value": "3"
+    }
+  ]
+}
