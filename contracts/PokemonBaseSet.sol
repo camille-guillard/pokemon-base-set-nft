@@ -64,14 +64,18 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
     }
 
     function addToPresaleList(address[] calldata _addressList) external onlyOwner {
-        for(uint8 i=0; i<_addressList.length; i++) {
+        uint256 length = _addressList.length;
+        for(uint8 i=0; i<length;) {
             preSalesList[_addressList[i]] = true;
+            unchecked{ i++; }
         }
     }
 
     function removeFromPresaleList(address[] calldata _addressList) external onlyOwner {
-        for(uint8 i=0; i<_addressList.length; i++) {
+        uint256 length = _addressList.length;
+        for(uint8 i=0; i<length;) {
             preSalesList[_addressList[i]] = false;
+            unchecked{ i++; }
         }
     }
 
@@ -120,18 +124,21 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         numberOfUserBoostersInstock[msg.sender] = numberOfUserBoostersInstock[msg.sender] -1;
 
         // 2 common energy cards
-        for(uint8 i=0; i < 2; i++) {
+        for(uint8 i=0; i < 2;) {
             mintCard(getRandomCardIt(commonEnergyCardIndex));
+            unchecked{ i++; }
         }
 
         // 5 common cards
-        for(uint8 i=0; i < 5; i++) {
+        for(uint8 i=0; i < 5;) {
             mintCard(getRandomCardIt(commonCardIndex));
+            unchecked{ i++; }
         }
         
         // 3 uncommon cards
-        for(uint8 i=0; i < 3; i++) {
+        for(uint8 i=0; i < 3;) {
             mintCard(getRandomCardIt(uncommonCardIndex));
+            unchecked{ i++; }
         }
 
         // 1/3 chance : 1 holo card, 2/3 chance : 1 rare card
