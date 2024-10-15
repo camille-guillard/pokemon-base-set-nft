@@ -48,7 +48,6 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
     error ExceedsMaxTokens();
     error NotEnoughEthDeposited();
     error ExceedsTotalSupply();
-    error ContratsNotAllowed();
     error CannotMint0Nft();
     error ExceedsMaxTokensAtOnce();
 
@@ -84,7 +83,6 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         require(preSalesListClaimed[msg.sender] + _number <= preSalesListMax, ExceedsMaxTokens());
         require(msg.value >= boosterPrice * _number, NotEnoughEthDeposited());
         require(_number > 0, CannotMint0Nft());
-        require(tx.origin == msg.sender, ContratsNotAllowed());
 
         preSalesListClaimed[msg.sender] += _number;
         numberOfUserBoostersInstock[msg.sender] = numberOfUserBoostersInstock[msg.sender] + _number;
@@ -98,7 +96,6 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         require(msg.value >= boosterPrice * _number, NotEnoughEthDeposited());
         require(totalSupply() + (_number) <= maxBoosterSales, ExceedsTotalSupply());
         require(numberOfUserBoostersInstock[msg.sender] + _number <= maxNumberOfUserBoostersInstock, ExceedsMaxBoostersPerUser());
-        require(tx.origin == msg.sender, ContratsNotAllowed());
 
         numberOfUserBoostersInstock[msg.sender] = numberOfUserBoostersInstock[msg.sender] + _number;
 
@@ -111,7 +108,6 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         require(msg.value >= displayPrice * _number, NotEnoughEthDeposited());
         require(totalSupply() + (_number * cardPerBooster) <= maxBoosterSales, ExceedsTotalSupply());
         require(numberOfUserBoostersInstock[msg.sender] + _number <= maxNumberOfUserBoostersInstock, ExceedsMaxBoostersPerUser());
-        require(tx.origin == msg.sender, ContratsNotAllowed());
 
         numberOfUserBoostersInstock[msg.sender] = numberOfUserBoostersInstock[msg.sender] + (_number * boosterPerDisplay);
 
