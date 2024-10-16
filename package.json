@@ -14,10 +14,13 @@
     "hardhat": "^2.22.10"
   },
   "dependencies": {
+    "@chainlink/contracts": "^1.2.0",
     "@nomicfoundation/hardhat-ignition": "^0.15.5",
     "@nomicfoundation/hardhat-ignition-viem": "^0.15.5",
     "@openzeppelin/contracts": "^5.0.2",
     "dotenv": "^16.4.5",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.4.0",
     "mocha": "^10.7.3"
   }
 }

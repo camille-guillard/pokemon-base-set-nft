@@ -1,6 +1,7 @@
 pragma solidity 0.8.27;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./SalesActivation.sol";
@@ -15,6 +16,7 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
     uint8 public maxDisplayAtOnce = 6;
     address public claimFundAddress;
     string public nftURI;
+    bytes32 public rootHash;
     mapping(address => bool) public preSalesList;
     mapping(address => uint256) public preSalesListClaimed;
     mapping(address => uint256) public numberOfUserBoostersInstock;
@@ -35,7 +37,7 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
 
     uint256 private random = 0;
 
-    event PreSaleMintBooster(uint8 quantity, address indexed buyer);
+    event PreSaleBuyBooster(uint8 quantity, address indexed buyer);
     event BuyBooster(uint8 quantity, address indexed buyer);
     event BuyDisplay(uint8 quantity, address indexed buyer);
     event MintBooster(address indexed buyer);
@@ -56,30 +58,30 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         address _claimFundAddress,
         uint256 _preSalesStartTime,
         uint256 _preSalesEndTime,
-        uint256 _publicSalesStartTime
+        uint256 _publicSalesStartTime,
+        bytes32 _rootHash
     ) ERC721("PokemonBaseSet", "PKMN-BS") SalesActivation(_preSalesStartTime, _preSalesEndTime, _publicSalesStartTime, _claimFundAddress) {
             nftURI = _nftURI;
             claimFundAddress = _claimFundAddress;
+            rootHash = _rootHash;
     }
 
-    function addToPresaleList(address[] calldata _addressList) external onlyOwner {
-        uint256 length = _addressList.length;
-        for(uint8 i=0; i<length;) {
-            preSalesList[_addressList[i]] = true;
-            unchecked{ i++; }
-        }
+    function verifyProof(
+        bytes32[] calldata proof,
+        bytes32 leaf
+    ) private view returns (bool) {
+        return MerkleProof.verify(proof, rootHash, leaf);
     }
 
-    function removeFromPresaleList(address[] calldata _addressList) external onlyOwner {
-        uint256 length = _addressList.length;
-        for(uint8 i=0; i<length;) {
-            preSalesList[_addressList[i]] = false;
-            unchecked{ i++; }
-        }
+    modifier isWhitelistedAddress(bytes32[] calldata proof) {
+        require(
+            verifyProof(proof, keccak256(abi.encodePacked(msg.sender))),
+            "Not WhiteListed Address"
+        );
+        _;
     }
 
-    function preSaleMintBooster(uint8 _number) external payable isPreSalesActive {
-        require(preSalesList[msg.sender], AddressNotInTheWhiteList());
+    function preSaleBuyBooster(bytes32[] calldata proof, uint8 _number) external payable isPreSalesActive isWhitelistedAddress(proof) {
         require(preSalesListClaimed[msg.sender] + _number <= preSalesListMax, ExceedsMaxTokens());
         require(msg.value >= boosterPrice * _number, NotEnoughEthDeposited());
         require(_number > 0, CannotMint0Nft());
@@ -87,7 +89,7 @@ contract PokemonBaseSet is ERC721Enumerable, SalesActivation {
         preSalesListClaimed[msg.sender] += _number;
         numberOfUserBoostersInstock[msg.sender] = numberOfUserBoostersInstock[msg.sender] + _number;
 
-        emit PreSaleMintBooster(_number, msg.sender);
+        emit PreSaleBuyBooster(_number, msg.sender);
     }
 
     function buyBooster(uint8 _number) external payable isPublicSalesActive {

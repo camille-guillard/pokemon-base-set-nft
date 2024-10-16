@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const { ethers, deployments } = require("hardhat");
 const { time } = require('@nomicfoundation/hardhat-network-helpers');
+const  { whiteList } = require("./whiteList.json");
 
 let contract, owner, addr1, addr2, addr3, now;
   
@@ -13,7 +14,8 @@ beforeEach(async function() {
     owner.address,
     now + time.duration.minutes(10),
     now + time.duration.minutes(20),
-    now + time.duration.minutes(21)
+    now + time.duration.minutes(21),
+    "0x12014c768bd10562acd224ac6fb749402c37722fab384a6aecc8f91aa7dc51cf"
   );
 });
 
@@ -33,43 +35,33 @@ describe("Pokémon Base Set - Initialization", function () {
 
 describe("Pokémon Base Set - Pre-sales", function () {
 
-  it("should failed when calling the presale function before the presale date", async function () {
-    await expect(contract.connect(addr1).preSaleMintBooster(1)).to.be.revertedWithCustomError(contract, "PreSalesNotStarted");
-  });
-
-  it("should failed when calling the presale function with an address not in the allow list", async function () {
+  it("should failed when an unlisted address try to buy a booster during the preasale", async function () {
+    const addr2FakeProof = [
+      "0xe9707d0e6171f728f7473c24cc0432a9b07eaaf1efed6a137a4a8c12c79552d9",
+      "0x1ebaa930b8e9130423c183bf38b0564b0103180b7dad301013b18e59880541ae",
+    ];
     await time.increase(time.duration.minutes(11));
-    await expect(contract.connect(addr1).preSaleMintBooster(1)).to.be.revertedWithCustomError(contract, "AddressNotInTheWhiteList");
+    await expect(contract.connect(addr2).preSaleBuyBooster(addr2FakeProof, 1, {value: ethers.parseUnits("0.01", "ether")})).to.be.revertedWith("Not WhiteListed Address");
   });
 
-  it("should failed when an user other than the owner try to add addresses in the allow list", async function () {
-    await expect(contract.connect(addr1).addToPresaleList([addr1.address])).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+  it("should failed when a listed address try to buy a booster before the presale date during the presale", async function () {
+    await expect(contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1)).to.be.revertedWithCustomError(contract, "PreSalesNotStarted");
   });
 
-  it("should failed when calling the presale function with an address removed from the allow list", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
-    await contract.connect(owner).removeFromPresaleList([addr1.address]);
+  it("should failed when a listed address try to buy more than 2 boosters during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await expect(contract.connect(addr1).preSaleMintBooster(1)).to.be.revertedWithCustomError(contract, "AddressNotInTheWhiteList");
+    await expect(contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 3)).to.be.revertedWithCustomError(contract, "ExceedsMaxTokens");
   });
 
-  it("should failed when calling the presale function with the number of nft requested  than 2", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should failed when a listed address try to buy a booster without enough eth during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await expect(contract.connect(addr1).preSaleMintBooster(3)).to.be.revertedWithCustomError(contract, "ExceedsMaxTokens");
+    await expect(contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 2)).to.be.revertedWithCustomError(contract, "NotEnoughEthDeposited");
   });
 
-  it("should failed when calling the presale function without enough eth", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should mint 11 nft when a listed address try to buy and mint a booster during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await expect(contract.connect(addr1).preSaleMintBooster(2)).to.be.revertedWithCustomError(contract, "NotEnoughEthDeposited");
-  });
-
-  it("should mint 11 nft (1 booster) during the presale", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
-    await time.increase(time.duration.minutes(11));
-    const tx = await contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")});
-    expect(tx).to.emit(contract, "PreSaleMintBooster").withArgs(1, addr1.address);
+    const tx = await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")});
+    await expect(tx).to.emit(contract, "PreSaleBuyBooster").withArgs(1, addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(1);
     await contract.connect(addr1).mintBooster();
@@ -79,11 +71,10 @@ describe("Pokémon Base Set - Pre-sales", function () {
     expect(await contract.preSalesListClaimed(addr1.address)).to.equal(1);
   });
 
-  it("should mint 22 nft (2 boosters)", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should mint 11 nft when a listed address try to buy and mint 2 boosters during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    const tx = await contract.connect(addr1).preSaleMintBooster(2, {value: ethers.parseUnits("0.02", "ether")});
-    expect(tx).to.emit(contract, "PreSaleMintBooster").withArgs(2, addr1.address);
+    const tx = await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 2, {value: ethers.parseUnits("0.02", "ether")});
+    await expect(tx).to.emit(contract, "PreSaleBuyBooster").withArgs(2, addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(2);
 
@@ -97,17 +88,15 @@ describe("Pokémon Base Set - Pre-sales", function () {
     expect(await contract.preSalesListClaimed(addr1.address)).to.equal(2);
   });
 
-  it("should failed when calling the presale function requesting 2 nft with only the value for 1", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should failed when a listed address try to buy 2 boosters with only the value for 1 during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await expect(contract.connect(addr1).preSaleMintBooster(2, {value: ethers.parseUnits("0.01", "ether")})).to.be.revertedWithCustomError(contract, "NotEnoughEthDeposited");
+    await expect(contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 2, {value: ethers.parseUnits("0.01", "ether")})).to.be.revertedWithCustomError(contract, "NotEnoughEthDeposited");
   });
 
-  it("should mint 22 nft (2 * 1 booster) during the presale", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should mint 22 nft when a listed address try to buy and mint a booster two times during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")});
-    await contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")});
+    await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")});
+    await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")});
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(2);
 
@@ -119,14 +108,12 @@ describe("Pokémon Base Set - Pre-sales", function () {
     expect(await contract.balanceOf(addr1.address)).to.equal(22);
   });
 
-  it("should failed if an user try to mint 3 * 1 nft during the presale", async function () {
-    await contract.connect(owner).addToPresaleList([addr1.address]);
+  it("should failed when a listed address try to buy 1 booster three times with only the value for 1 during the presale", async function () {
     await time.increase(time.duration.minutes(11));
-    await contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")});
-    await contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")});
-    await expect(contract.connect(addr1).preSaleMintBooster(1, {value: ethers.parseUnits("0.01", "ether")})).to.be.revertedWithCustomError(contract, "ExceedsMaxTokens");
+    await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")});
+    await contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")});
+    await expect(contract.connect(addr1).preSaleBuyBooster(whiteList[1].proof, 1, {value: ethers.parseUnits("0.01", "ether")})).to.be.revertedWithCustomError(contract, "ExceedsMaxTokens");
     
-
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(2);
 
     for(var i=0; i<2; i++) {
@@ -172,14 +159,14 @@ describe("Pokémon Base Set - Buy booster", function () {
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(35);
   });
 
-  it("should failed if an user try to buy more than 35 boosters at once", async function () {
+  it("should failed when an user try to buy more than 35 boosters at once", async function () {
     await time.increase(time.duration.minutes(21));
     await expect(contract.connect(addr1).buyBooster(36, {value: ethers.parseUnits("0.36", "ether")})).to.be.revertedWithCustomError(contract, "ExceedsMaxTokensAtOnce");
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(0);
   });
 
-  it("should failed if an user try to buy more than 216 boosters", async function () {
+  it("should failed when an user try to buy more than 216 boosters", async function () {
     await time.increase(time.duration.minutes(21));
 
     for(var i=0; i < 216; i++) {
@@ -200,7 +187,7 @@ describe("Pokémon Base Set - Buy display", function () {
     await time.increase(time.duration.minutes(21));
 
     const tx = await contract.connect(addr1).buyDisplay(1, {value: ethers.parseUnits("0.3", "ether")})
-    expect(tx).to.emit(contract, "BuyDisplay").withArgs(1, addr1.address);
+    await expect(tx).to.emit(contract, "BuyDisplay").withArgs(1, addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(36);
   });
@@ -209,12 +196,12 @@ describe("Pokémon Base Set - Buy display", function () {
     await time.increase(time.duration.minutes(21));
 
     const tx = await contract.connect(addr1).buyDisplay(6, {value: ethers.parseUnits("1.8", "ether")})
-    expect(tx).to.emit(contract, "BuyDisplay").withArgs(6, addr1.address);
+    await expect(tx).to.emit(contract, "BuyDisplay").withArgs(6, addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(216);
   });
 
-  it("should failed if an user try to buy more than 6 displays at once", async function () {
+  it("should failed when an user try to buy more than 6 displays at once", async function () {
     await time.increase(time.duration.minutes(21));
     await expect(contract.connect(addr1).buyDisplay(7, {value: ethers.parseUnits("2.1", "ether")})).to.be.revertedWithCustomError(contract, "ExceedsMaxTokensAtOnce");
 
@@ -225,24 +212,24 @@ describe("Pokémon Base Set - Buy display", function () {
 
 
 describe("Pokémon Base Set - Mint", function () {
-  it("should mint 11 nft (1 booster)", async function () {
+  it("should mint 11 nft when a address try to buy and mint a booster", async function () {
     await time.increase(time.duration.minutes(21));
     await contract.connect(addr1).buyBooster(1, {value: ethers.parseUnits("0.01", "ether")});
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(1);
 
     const tx = await contract.connect(addr1).mintBooster();
-    expect(tx).to.emit(contract, "MintBooster").withArgs(1, addr1.address);
+    await expect(tx).to.emit(contract, "MintBooster").withArgs(addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(0);
     expect(await contract.balanceOf(addr1.address)).to.equal(11);
   });
 
-  it("should mint 396 nft from 1 display (1 display = 36 booster * 11 cards)", async function () {
+  it("should mint 396 nft when a address try to buy and mint a display", async function () {
     await time.increase(time.duration.minutes(21));
 
     const tx = await contract.connect(addr1).buyDisplay(1, {value: ethers.parseUnits("0.3", "ether")})
-    expect(tx).to.emit(contract, "BuyDisplay").withArgs(2, addr1.address);
+    await expect(tx).to.emit(contract, "BuyDisplay").withArgs(1, addr1.address);
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(36);
 
@@ -255,7 +242,7 @@ describe("Pokémon Base Set - Mint", function () {
     expect(await contract.balanceOf(addr1.address)).to.equal(396);
   });
 
-  it("should buy and mint 10 boosters", async function () {
+  it("should mint 110 nft when a address try to buy and mint a booster", async function () {
     await time.increase(time.duration.minutes(21));
 
     for(var i=0; i < 10; i++) {
@@ -264,10 +251,11 @@ describe("Pokémon Base Set - Mint", function () {
       await contract.connect(addr1).mintBooster();
     }
 
+    expect(await contract.balanceOf(addr1.address)).to.equal(110);
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(0);
   });
 
-  it("should failed if an user try to mint a booster without buying one", async function () {
+  it("should failed when a address try to mint a booster without buying one", async function () {
     await time.increase(time.duration.minutes(21));
 
     expect(await contract.connect(addr1).numberOfUserBoostersInstock(addr1.address)).to.equal(0);
@@ -281,11 +269,11 @@ describe("Pokémon Base Set - Mint", function () {
 
 describe("Pokémon Base Set - Withdraw", function () {
 
-  it("Should failed because not owner", async function () {
+  it("Should when a non-owner address try to withdraw", async function () {
     await expect(contract.connect(addr1).withdraw()).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
   });
 
-  it("Should withdraw all funds in the contract", async function () {
+  it("Should withdraw all funds when the owner address try to withdraw", async function () {
       const balanceBefore = await ethers.provider.getBalance(owner.address)
       
       await time.increase(time.duration.minutes(21));

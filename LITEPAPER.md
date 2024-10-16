@@ -49,6 +49,27 @@ A user can stock a maximum of 216 boosters.
 
 The maximum supply is 3600000 boosters.
 
+
+## Using Merkle Tree for Whitelist
+
+The merkle tree algorithm is commontly used as encrypted data to verify if an address is included or not in a whitelist.
+
+A Merkle tree is a tree in which every "leaf" node is labelled with the cryptographic hash of a data block, and every node that is not a leaf (called a branch, inner node, or inode) is labelled with the cryptographic hash of the labels of its child nodes. A hash tree allows efficient and secure verification of the contents of a large data structure. A hash tree is a generalization of a hash list and a hash chain. 
+
+### Generate the whitelist
+
+-   Add all the address you want to include in the whitelist in the array of the "./config/registeredAddressForWhitelist.js" file.
+-    Run the script :
+```bash 
+node scripts/merkleTree.js
+```
+You can retrieve the root hash to add it to the contract parameters.
+Moreover, a new file named "whiteList.json" is created containing the leaf and the proof of all the whitelist addresses.
+During the presale period, the address will be verified and only the addresses in the whitelist will be able to buy a booster.
+
+
 ## Conclusion
 
 We invite anyone and everyone who loves Pokémon to join us and enjoy the first ever card collection of Pokémon.
+
+<img src="./img/image6.jpg" width="100%" />
