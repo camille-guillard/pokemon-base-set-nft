@@ -15,8 +15,11 @@ module.exports = buildModule("PokemonBaseSetModule", (m) => {
     networkConfig[chainId]["_preSalesStartTime"],
     networkConfig[chainId]["_preSalesEndTime"],
     networkConfig[chainId]["_publicSalesStartTime"],
-    networkConfig[chainId]["_subscriptionId"]
+    networkConfig[chainId]["_subscriptionId"],
+    networkConfig[chainId]["_vrfCoordinator"],
+    networkConfig[chainId]["_keyHash"]
   ]
+  
 
   const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis7" });
 

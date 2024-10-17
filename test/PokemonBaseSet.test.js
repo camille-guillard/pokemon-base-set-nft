@@ -1,28 +1,55 @@
-const { expect } = require("chai");
+const { assert, expect } = require("chai");
 const { ethers, deployments } = require("hardhat");
-const { time } = require('@nomicfoundation/hardhat-network-helpers');
+const { time, loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const  { whiteList } = require("./whiteList.json");
 
-let contract, owner, addr1, addr2, addr3, now;
+let contract, contractAddress, owner, addr1, addr2, addr3, now, VRFCoordinatorV2_5Mock;
   
 beforeEach(async function() {
   [owner, addr1, addr2, addr3] = await ethers.getSigners();
-  const pokemonBaseSetModule = await ethers.getContractFactory("PokemonBaseSet");
+  const pokemonBaseSet = await ethers.getContractFactory("PokemonBaseSetTest");
   now = (await ethers.provider.getBlock('latest')).timestamp;
-  contract = await pokemonBaseSetModule.connect(owner).deploy(
+
+  const BASE_FEE = "1000000000000000" // 0.001 ether as base fee
+  const GAS_PRICE = "50000000000" // 50 gwei 
+  const WEI_PER_UNIT_LINK = "10000000000000000" // 0.01 ether per LINK
+
+  const VRFCoordinatorV2_5MockFactory = await ethers.getContractFactory("VRFCoordinatorV2_5Mock")
+  VRFCoordinatorV2_5Mock = await VRFCoordinatorV2_5MockFactory.deploy(BASE_FEE, GAS_PRICE, WEI_PER_UNIT_LINK);
+  await VRFCoordinatorV2_5Mock.waitForDeployment();
+  
+  const fundAmount = "1000000000000000000"
+  const transaction = await VRFCoordinatorV2_5Mock.createSubscription()
+  const transactionReceipt = await transaction.wait(1)
+  const subscriptionId = transactionReceipt.logs[0].args[0]
+  await VRFCoordinatorV2_5Mock.fundSubscription(subscriptionId, fundAmount);
+
+  const vrfCoordinatorAddress = await VRFCoordinatorV2_5Mock.getAddress();
+  const keyHash = "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc";
+
+  contract = await pokemonBaseSet.connect(owner).deploy(
     "http://local",
     owner.address,
     now + time.duration.minutes(10),
     now + time.duration.minutes(20),
     now + time.duration.minutes(21),
-    "0x12014c768bd10562acd224ac6fb749402c37722fab384a6aecc8f91aa7dc51cf"
+    "0x12014c768bd10562acd224ac6fb749402c37722fab384a6aecc8f91aa7dc51cf",
+    subscriptionId,
+    vrfCoordinatorAddress,
+    keyHash
   );
+
+  await contract.waitForDeployment();
+  contractAddress = await contract.getAddress();
+
+  await VRFCoordinatorV2_5Mock.addConsumer(subscriptionId, contractAddress);
+
 });
 
 
 describe("Pokémon Base Set - Initialization", function () {
 
-    it("should init pokemonBaseSetModule contract", async function () {
+    it("should init pokemonBaseSet contract", async function () {
       expect(await contract.nftURI()).to.equal("http://local");
       expect(await contract.claimFundAddress()).to.equal(owner.address);
       expect(await contract.preSalesStartTime()).to.equal(now + time.duration.minutes(10));
@@ -270,7 +297,7 @@ describe("Pokémon Base Set - Mint", function () {
 describe("Pokémon Base Set - Withdraw", function () {
 
   it("Should when a non-owner address try to withdraw", async function () {
-    await expect(contract.connect(addr1).withdraw()).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).withdraw()).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should withdraw all funds when the owner address try to withdraw", async function () {
@@ -301,7 +328,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set boosterPrice because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setBoosterPrice(0)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setBoosterPrice(0)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the displayPrice by the owner", async function () {
@@ -311,7 +338,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set displayPrice because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setDisplayPrice(0)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setDisplayPrice(0)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the maxBoosterSales by the owner", async function () {
@@ -321,7 +348,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set maxBoosterSales because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setMaxBoosterSales(3)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setMaxBoosterSales(3)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the presaleListMax by the owner", async function () {
@@ -331,7 +358,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set presaleListMax because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setPreSalesListMax(3)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setPreSalesListMax(3)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the claimFundAddress by the owner", async function () {
@@ -341,7 +368,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set claimFundAddress because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setClaimFundAddress(addr1.address)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setClaimFundAddress(addr1.address)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the baseURI by the owner", async function () {
@@ -351,7 +378,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set baseURI because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setBaseURI("http://other-uri")).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setBaseURI("http://other-uri")).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the maxBoosterAtOnce by the owner", async function () {
@@ -361,7 +388,7 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set maxBoosterAtOnce because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setMaxBoosterAtOnce(100)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setMaxBoosterAtOnce(100)).to.be.revertedWith("Only callable by owner");
   });
 
   it("Should setting the maxDisplayAtOnce by the owner", async function () {
@@ -371,7 +398,39 @@ describe("Pokémon Base Set - Setters", function () {
   });
 
   it("Should failed to set maxDisplayAtOnce because the user is not the owner", async function () {
-    await expect(contract.connect(addr1).setMaxDisplayAtOnce(100)).to.be.revertedWithCustomError(contract, "OwnableUnauthorizedAccount");
+    await expect(contract.connect(addr1).setMaxDisplayAtOnce(100)).to.be.revertedWith("Only callable by owner");
   });
 
 });
+
+
+describe("Random Number Consumer Unit Tests", async function () {
+  it("Should successfully request a random number", async function () {
+    await expect(contract.connect(addr1).rollDice()).to.emit(
+        VRFCoordinatorV2_5Mock,
+        "RandomWordsRequested"
+    )
+  })
+
+  it("Should successfully request a random number and get a result", async function () {
+    const tx = await contract.connect(addr1).rollDice();
+    const requestId = await contract.connect(addr1).s_requestId()
+
+    await expect(tx).to.emit(contract, "DiceRolled").withArgs(requestId, addr1.address);
+
+
+    expect(await contract.connect(addr1).randomWords()).to.equals(42);
+
+    const tx2 = VRFCoordinatorV2_5Mock.fulfillRandomWords(requestId, contractAddress);
+    
+    await time.increase(time.duration.minutes(1));
+
+    const randomNumber = await contract.connect(addr1).randomWords();
+
+    await expect(tx2).to.emit(contract, "DiceLanded").withArgs(requestId, randomNumber);
+
+    expect(randomNumber).to.be.lessThan(42)
+
+  })
+
+})
