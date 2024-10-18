@@ -68,6 +68,19 @@ Moreover, a new file named "whiteList.json" is created containing the leaf and t
 During the presale period, the address will be verified and only the addresses in the whitelist will be able to buy a booster.
 
 
+## Cards drawing
+
+Randomness is very difficult to generate on blockchains. This is because every node on the blockchain must come to the same conclusion and form a consensus. Even though random numbers are versatile and useful in a variety of blockchain applications, they cannot be generated natively in smart contracts. 
+The solution to this issue is Chainlink VRF, also known as Chainlink Verifiable Random Function.
+
+Right after purchasing a booster, a request is sent to vrf chainlink to fetch random numbers outside of the blockchain.
+The callback function retrieves a list of random numbers (one for each booster) and this data is saved.
+Once, the random numbers are available, the user can now open the boosters to discover his cards.
+This external random number and the card position are used to select the card, deterministic variables, preventing the user from cheating by predicting the cards that will be assigned to him through parameters manipulation.
+
+Getting Started with Chainlink VRF V2.5 documentation : https://docs.chain.link/vrf/v2-5/getting-started 
+
+
 ## Conclusion
 
 We invite anyone and everyone who loves Pokémon to join us and enjoy the first ever card collection of Pokémon.
