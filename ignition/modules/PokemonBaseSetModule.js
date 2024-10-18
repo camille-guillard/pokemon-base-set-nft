@@ -15,13 +15,16 @@ module.exports = buildModule("PokemonBaseSetModule", (m) => {
     networkConfig[chainId]["_preSalesStartTime"],
     networkConfig[chainId]["_preSalesEndTime"],
     networkConfig[chainId]["_publicSalesStartTime"],
+    networkConfig[chainId]["_merkleTreeRootHash"],
     networkConfig[chainId]["_subscriptionId"],
     networkConfig[chainId]["_vrfCoordinator"],
-    networkConfig[chainId]["_keyHash"]
+    networkConfig[chainId]["_keyHash"],
+    networkConfig[chainId]["_callbackGasLimit"],
+    networkConfig[chainId]["_requestConfirmations"]
   ]
   
 
-  const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis7" });
+  const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis" });
 
   return { pokemonBaseSetContract };
 });
