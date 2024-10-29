@@ -81,16 +81,34 @@ This external random number and the card position are used to select the card, d
 Getting Started with Chainlink VRF V2.5 documentation : https://docs.chain.link/vrf/v2-5/getting-started 
 
 
+## User Interface
+
+You can interact with the contract on the user interface by buying a booster or a display and then open a booster.
+
+##### Home Page
+<img src="./img/image10.jpg" width="100%" />
+
+##### Mint Page
+<img src="./img/image11.jpg" width="100%" />
+
 ## Sepolia Testnet deployment
 
-Deployed Address : 0xD14d0A4Cc4BD6af4686c03Bc6Fe46782e8BFbb77
-Contract : https://sepolia.etherscan.io/address/0xD14d0A4Cc4BD6af4686c03Bc6Fe46782e8BFbb77#code
-Chainlink VRF2.5 subscription : https://vrf.chain.link/#/side-drawer/subscription/113976695910214076856129855253409653665408242942060079584559527527298385366102
-OpenSea : https://testnets.opensea.io/fr/collection/pokemonbaseset-10
+##### Deployed Address 
+0xD14d0A4Cc4BD6af4686c03Bc6Fe46782e8BFbb77 <br/>
+##### Contract 
+https://sepolia.etherscan.io/address/0xD14d0A4Cc4BD6af4686c03Bc6Fe46782e8BFbb77#code <br/>
+##### Chainlink VRF2.5 subscription 
+https://vrf.chain.link/#/side-drawer/subscription/113976695910214076856129855253409653665408242942060079584559527527298385366102 <br/>
+##### Metadata 
+https://gold-acute-python-408.mypinata.cloud/ipfs/QmPS91JPSF4qLxixrNFhAso4FjJciEaCe8Fefr5THd6miX/ <br/>
+##### OpenSea 
+https://testnets.opensea.io/collection/pokemon-base-set?search[sortBy]=CREATED_DATE <br/>
 
+<br/>
+
+<img src="./img/image12.jpg" width="100%" />
 
 ## Conclusion
 
-We invite anyone and everyone who loves Pokémon to join us and enjoy the first ever card collection of Pokémon.
-
-<img src="./img/image6.jpg" width="100%" />
+We invite anyone and everyone who loves Pokémon to join us and enjoy the first ever card collection of Pokémon.<br/>
+Thank you!
