@@ -102,7 +102,7 @@ https://vrf.chain.link/#/side-drawer/subscription/113976695910214076856129855253
 ##### Metadata 
 https://gold-acute-python-408.mypinata.cloud/ipfs/QmPS91JPSF4qLxixrNFhAso4FjJciEaCe8Fefr5THd6miX/ <br/>
 ##### OpenSea 
-https://testnets.opensea.io/collection/pokemon-base-set?search[sortBy]=CREATED_DATE <br/>
+https://testnets.opensea.io/collection/pokemon-base-set?search[sortAscending]=false&search[sortBy]=LISTING_DATE <br/>
 
 <br/>
 

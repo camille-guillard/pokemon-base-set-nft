@@ -116,6 +116,17 @@ describe("Pokémon Base Set - Pre-sales", function () {
     await contract.connect(addr1).openBooster();
     expect(await contract.connect(addr1).numberOfUnopenedBoosters()).to.equal(0);
 
+    for(var i=0; i<11; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
+    // Checking card rarity stats
+    const cardRarityStats = await contract.connect(addr1).getCardRarityStats()
+    expect(cardRarityStats[0] + cardRarityStats[1]).to.equal(1);
+    expect(cardRarityStats[2]).to.equal(3);
+    expect(cardRarityStats[3]).to.equal(5);
+    expect(cardRarityStats[4]).to.equal(2);
+
     expect(await contract.balanceOf(addr1.address)).to.equal(11);
     expect(await contract.preSalesListClaimed(addr1.address)).to.equal(1);
   });
@@ -148,6 +159,17 @@ describe("Pokémon Base Set - Pre-sales", function () {
     for(var i=0; i<2; i++) {
       await contract.connect(addr1).openBooster();
     }
+
+    for(var i=0; i<22; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
+    // Checking card rarity stats
+    const cardRarityStats = await contract.connect(addr1).getCardRarityStats()
+    expect(cardRarityStats[0] + cardRarityStats[1]).to.equal(2);
+    expect(cardRarityStats[2]).to.equal(6);
+    expect(cardRarityStats[3]).to.equal(10);
+    expect(cardRarityStats[4]).to.equal(4);
 
     // Status after Opening a booster
     expect(await contract.connect(addr1).currentRandomNumberIndex()).to.equals(0);
@@ -193,6 +215,17 @@ describe("Pokémon Base Set - Pre-sales", function () {
     for(var i=0; i<2; i++) {
       await contract.connect(addr1).openBooster();
     }
+
+    for(var i=0; i<22; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
+    // Checking card rarity stats
+    const cardRarityStats = await contract.connect(addr1).getCardRarityStats()
+    expect(cardRarityStats[0] + cardRarityStats[1]).to.equal(2);
+    expect(cardRarityStats[2]).to.equal(6);
+    expect(cardRarityStats[3]).to.equal(10);
+    expect(cardRarityStats[4]).to.equal(4);    
 
     expect(await contract.connect(addr1).numberOfUnopenedBoosters()).to.equal(0);
     expect(await contract.balanceOf(addr1.address)).to.equal(22);
@@ -326,6 +359,17 @@ describe("Pokémon Base Set - Mint", function () {
     const tx3 = await contract.connect(addr1).openBooster();
     await expect(tx3).to.emit(contract, "OpenBooster").withArgs(addr1.address);
 
+    for(var i=0; i<11; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
+    // Checking card rarity stats
+    const cardRarityStats = await contract.connect(addr1).getCardRarityStats()
+    expect(cardRarityStats[0] + cardRarityStats[1]).to.equal(1);
+    expect(cardRarityStats[2]).to.equal(3);
+    expect(cardRarityStats[3]).to.equal(5);
+    expect(cardRarityStats[4]).to.equal(2);
+
     expect(await contract.connect(addr1).numberOfUnopenedBoosters()).to.equal(0);
     expect(await contract.balanceOf(addr1.address)).to.equal(11);
   });
@@ -375,6 +419,10 @@ describe("Pokémon Base Set - Mint", function () {
       await contract.connect(addr1).openBooster();
     }
 
+    for(var i=0; i<396; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
     expect(await contract.connect(addr1).currentRandomNumberIndex()).to.equals(0);
     expect(await contract.connect(addr1).randomNumberByIndex(1)).to.equals(0);
     expect(await contract.connect(addr1).randomNumberByIndex(2)).to.equals(0);
@@ -411,10 +459,20 @@ describe("Pokémon Base Set - Mint", function () {
       await contract.connect(addr1).openBooster();
     }
 
+    for(var i=0; i<110; i++) {
+      expect((await contract.connect(addr1).tokenURI(i)));
+    }
+
+    // Checking card rarity stats
+    const cardRarityStats = await contract.connect(addr1).getCardRarityStats()
+    expect(cardRarityStats[0] + cardRarityStats[1]).to.equal(10);
+    expect(cardRarityStats[2]).to.equal(30);
+    expect(cardRarityStats[3]).to.equal(50);
+    expect(cardRarityStats[4]).to.equal(20);
+
     expect(await contract.balanceOf(addr1.address)).to.equal(110);
     expect(await contract.connect(addr1).numberOfUnopenedBoosters()).to.equal(0);
   });
-
 
   it("should failed when a address try to mint a booster without buying one", async function () {
     await time.increase(time.duration.minutes(21));
@@ -617,6 +675,10 @@ describe("Pokémon Base Set - Setters", function () {
 
   it("Should failed to set requestConfirmations because the user is not the owner", async function () {
     await expect(contract.connect(addr1).setRequestConfirmations(1)).to.be.revertedWith("Only callable by owner");
+  });
+
+  it("should failed when a user call the uri for an non-existent nft", async function () {
+    await expect(contract.connect(addr1).tokenURI(0)).to.be.revertedWithCustomError(contract, "URIQueryForNonexistentToken");
   });
 
 });

@@ -1,13 +1,13 @@
 pragma solidity 0.8.28;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import {VRFConsumerBaseV2Plus} from "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
 import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 
-contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
+contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
 
     // VRF2.5 params
     uint256 public s_subscriptionId;
@@ -48,7 +48,7 @@ contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
     uint8 public maxCardId = 102;
     uint8 public cardPerBooster = 11;
     uint8 public boosterPerDisplay = 36;
-    mapping(uint256 => uint8) private cardIds;
+    mapping(uint256 => uint8) internal cardIds;
 
     // Number of card per rarity
     uint8[] private holoCardIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -56,6 +56,25 @@ contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
     uint8[] private uncommonCardIndex = [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 95];
     uint8[] private commonCardIndex = [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 90, 91, 92, 93, 94, 96];
     uint8[] private commonEnergyCardIndex = [97, 98, 99, 100, 101];
+
+    uint8 internal constant HOLO_CARD_INDEX_START = 0;
+    uint8 internal constant HOLO_CARD_INDEX_END = 15;
+    uint8 internal constant RARE_CARD_INDEX_START_1 = 16;
+    uint8 internal constant RARE_CARD_INDEX_END_1 = 21;
+    uint8 internal constant RARE_CARD_INDEX_START_2 = 69;
+    uint8 internal constant RARE_CARD_INDEX_END_2 = 78;
+    uint8 internal constant UNCOMMON_CARD_INDEX_START_1 = 22;
+    uint8 internal constant UNCOMMON_CARD_INDEX_END_1 = 41;
+    uint8 internal constant UNCOMMON_CARD_INDEX_START_2 = 79;
+    uint8 internal constant UNCOMMON_CARD_INDEX_END_2 = 89;
+    uint8 internal constant UNCOMMON_CARD_INDEX_3 = 95;
+    uint8 internal constant COMMON_CARD_INDEX_START_1 = 42;
+    uint8 internal constant COMMON_CARD_INDEX_END_1 = 68;
+    uint8 internal constant COMMON_CARD_INDEX_START_2 = 90;
+    uint8 internal constant COMMON_CARD_INDEX_END_2 = 94;
+    uint8 internal constant COMMON_CARD_INDEX_3 = 96;
+    uint8 internal constant COMMON_ENERGY_CARD_INDEX_START = 97;
+    uint8 internal constant COMMON_ENERGY_CARD_INDEX_END = 101;
 
     // Events
     event PreSaleBuyBooster(uint8 quantity, address indexed buyer);
@@ -95,7 +114,7 @@ contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
         uint32 _callbackGasLimit,
         uint16 _requestConfirmations
     )
-    ERC721("PokemonBaseSet", "PKMN-BS")
+    ERC721A("PokemonBaseSet", "PKMN-BS")
     VRFConsumerBaseV2Plus(_vrfCoordinator)
     {
         nftURI = _nftURI;
@@ -207,7 +226,7 @@ contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
 
     function mintCard(uint8 _cardIndex) private {
         uint256 newTokenId = totalSupply() + 1;
-        _safeMint(msg.sender, newTokenId);
+        _mint(msg.sender, 1);
         cardIds[newTokenId] = _cardIndex;
         emit MintCard(_cardIndex, msg.sender);
     }
@@ -287,7 +306,7 @@ contract PokemonBaseSet is ERC721Enumerable, VRFConsumerBaseV2Plus {
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        _requireOwned(tokenId);
+        if (!_exists(tokenId)) _revert(URIQueryForNonexistentToken.selector);
         require(cardIds[tokenId] >= 0);
         return bytes(nftURI).length > 0 ? string.concat(nftURI, Strings.toString(cardIds[tokenId])) : "";
     }
