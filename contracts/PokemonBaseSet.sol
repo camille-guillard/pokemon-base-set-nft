@@ -57,8 +57,16 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
     uint8[] private commonCardIndex = [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 90, 91, 92, 93, 94, 96];
     uint8[] private commonEnergyCardIndex = [97, 98, 99, 100, 101];
 
+    // Card number by rarity
+    uint8 internal constant HOLO_CARD_NUMBER = 16;
+    uint8 internal constant RARE_CARD_NUMBER = 16;
+    uint8 internal constant UNCOMMON_CARD_NUMBER = 32;
+    uint8 internal constant COMMON_CARD_NUMBER = 33;
+    uint8 internal constant COMMON_ENERGY_CARD_NUMBER = 5;
     uint8 internal constant HOLO_CARD_INDEX_START = 0;
     uint8 internal constant HOLO_CARD_INDEX_END = 15;
+
+    // Card ranges
     uint8 internal constant RARE_CARD_INDEX_START_1 = 16;
     uint8 internal constant RARE_CARD_INDEX_END_1 = 21;
     uint8 internal constant RARE_CARD_INDEX_START_2 = 69;
@@ -75,6 +83,7 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
     uint8 internal constant COMMON_CARD_INDEX_3 = 96;
     uint8 internal constant COMMON_ENERGY_CARD_INDEX_START = 97;
     uint8 internal constant COMMON_ENERGY_CARD_INDEX_END = 101;
+
 
     // Events
     event PreSaleBuyBooster(uint8 quantity, address indexed buyer);
@@ -189,44 +198,44 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
         
         userBoosters[msg.sender].numberOfUnopenedBoosters = numberOfUnopenedBoosters(msg.sender) -1;
 
+        uint256 seed = currentRandomNumber(msg.sender);
+        uint256 newTokenId = totalSupply() + 1;
+
         // 2 common energy cards
-        for(uint8 i=0; i < 2;) {
-            mintCard(getRandomCardIt(commonEnergyCardIndex, i));
-            unchecked{ i++; }
-        }
+        registerCard(newTokenId++, getRandomCardIt(commonEnergyCardIndex, seed>>8));
+        registerCard(newTokenId++, getRandomCardIt(commonEnergyCardIndex, seed>>16));
 
         // 5 common cards
-        for(uint8 i=0; i < 5;) {
-            mintCard(getRandomCardIt(commonCardIndex, i));
-            unchecked{ i++; }
-        }
+        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>24));
+        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>32));
+        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>40));
+        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>48));
+        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>56));
         
         // 3 uncommon cards
-        for(uint8 i=0; i < 3;) {
-            mintCard(getRandomCardIt(uncommonCardIndex, i));
-            unchecked{ i++; }
-        }
+        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>64));
+        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>72));
+        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>80));
 
         // 1/3 chance : 1 holo card, 2/3 chance : 1 rare card
-        if((currentRandomNumber(msg.sender) % 3) == 0) {
-            mintCard(getRandomCardIt(holoCardIndex, 0));
+        if((seed % 3) == 0) {
+            registerCard(newTokenId, getRandomCardIt(holoCardIndex, seed>>88));
         } else {
-            mintCard(getRandomCardIt(rareCardIndex, 0));
+            registerCard(newTokenId, getRandomCardIt(rareCardIndex, seed>>88));
         }
 
+        _mint(msg.sender, 11);
         userBoosters[msg.sender].s_results[currentRandomNumberIndex(msg.sender)] = 0;
         userBoosters[msg.sender].currentRandomNumberIndex -= 1;
 
         emit OpenBooster(msg.sender);
     }
 
-    function getRandomCardIt(uint8[] storage _cardIndexTable, uint8 _number) private view returns (uint8) {
-        return _cardIndexTable[uint(keccak256(abi.encodePacked(currentRandomNumber(msg.sender), _number))) % _cardIndexTable.length];
+    function getRandomCardIt(uint8[] storage _cardIndexTable, uint256 _seed) private view returns (uint8) {
+        return _cardIndexTable[uint(keccak256(abi.encodePacked(_seed))) % _cardIndexTable.length];
     }
 
-    function mintCard(uint8 _cardIndex) private {
-        uint256 newTokenId = totalSupply() + 1;
-        _mint(msg.sender, 1);
+    function registerCard(uint256 newTokenId, uint8 _cardIndex) private {
         cardIds[newTokenId] = _cardIndex;
         emit MintCard(_cardIndex, msg.sender);
     }
