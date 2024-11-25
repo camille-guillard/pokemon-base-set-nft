@@ -63,10 +63,10 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
     uint8 internal constant UNCOMMON_CARD_NUMBER = 32;
     uint8 internal constant COMMON_CARD_NUMBER = 33;
     uint8 internal constant COMMON_ENERGY_CARD_NUMBER = 5;
-    uint8 internal constant HOLO_CARD_INDEX_START = 0;
-    uint8 internal constant HOLO_CARD_INDEX_END = 15;
 
     // Card ranges
+    uint8 internal constant HOLO_CARD_INDEX_START = 0;
+    uint8 internal constant HOLO_CARD_INDEX_END = 15;
     uint8 internal constant RARE_CARD_INDEX_START_1 = 16;
     uint8 internal constant RARE_CARD_INDEX_END_1 = 21;
     uint8 internal constant RARE_CARD_INDEX_START_2 = 69;
@@ -199,29 +199,28 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
         userBoosters[msg.sender].numberOfUnopenedBoosters = numberOfUnopenedBoosters(msg.sender) -1;
 
         uint256 seed = currentRandomNumber(msg.sender);
-        uint256 newTokenId = totalSupply() + 1;
 
         // 2 common energy cards
-        registerCard(newTokenId++, getRandomCardIt(commonEnergyCardIndex, seed>>8));
-        registerCard(newTokenId++, getRandomCardIt(commonEnergyCardIndex, seed>>16));
+        registerCard(totalSupply(), getRandomEnergyCommonCardId(seed>>8));
+        registerCard(totalSupply()+1, getRandomEnergyCommonCardId(seed>>16));
 
         // 5 common cards
-        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>24));
-        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>32));
-        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>40));
-        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>48));
-        registerCard(newTokenId++, getRandomCardIt(commonCardIndex, seed>>56));
+        registerCard(totalSupply()+2, getRandomCommonCardId(seed>>24));
+        registerCard(totalSupply()+3, getRandomCommonCardId(seed>>32));
+        registerCard(totalSupply()+4, getRandomCommonCardId(seed>>40));
+        registerCard(totalSupply()+5, getRandomCommonCardId(seed>>48));
+        registerCard(totalSupply()+6, getRandomCommonCardId(seed>>56));
         
         // 3 uncommon cards
-        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>64));
-        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>72));
-        registerCard(newTokenId++, getRandomCardIt(uncommonCardIndex, seed>>80));
+        registerCard(totalSupply()+7, getRandomUncommonCardId(seed>>64));
+        registerCard(totalSupply()+8, getRandomUncommonCardId(seed>>72));
+        registerCard(totalSupply()+9, getRandomUncommonCardId(seed>>80));
 
         // 1/3 chance : 1 holo card, 2/3 chance : 1 rare card
         if((seed % 3) == 0) {
-            registerCard(newTokenId, getRandomCardIt(holoCardIndex, seed>>88));
+            registerCard(totalSupply()+10, getRandomHoloCardId(seed>>88));
         } else {
-            registerCard(newTokenId, getRandomCardIt(rareCardIndex, seed>>88));
+            registerCard(totalSupply()+10, getRandomRareCardId(seed>>88));
         }
 
         _mint(msg.sender, 11);
@@ -231,8 +230,50 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
         emit OpenBooster(msg.sender);
     }
 
-    function getRandomCardIt(uint8[] storage _cardIndexTable, uint256 _seed) private view returns (uint8) {
+    /*function getRandomCardIt(uint8[] storage _cardIndexTable, uint256 _seed) private view returns (uint8) {
         return _cardIndexTable[uint(keccak256(abi.encodePacked(_seed))) % _cardIndexTable.length];
+    }*/
+
+    function getRandomHoloCardId(uint256 _seed) private pure returns (uint8) {
+        return uint8(uint(keccak256(abi.encodePacked(_seed))) % HOLO_CARD_NUMBER);
+    }
+
+    function getRandomRareCardId(uint256 _seed) private pure returns (uint8) {
+        uint8 cardIndex = uint8((uint(keccak256(abi.encodePacked(_seed))) % RARE_CARD_NUMBER));
+        
+        if(cardIndex <= (RARE_CARD_INDEX_END_1 - RARE_CARD_INDEX_START_1 + 1)) {
+            return RARE_CARD_INDEX_START_1 + cardIndex;
+        } else {
+            return RARE_CARD_INDEX_START_2 + cardIndex - (RARE_CARD_INDEX_END_1 - RARE_CARD_INDEX_START_1 + 1);
+        }
+    }
+
+    function getRandomUncommonCardId(uint256 _seed) private pure returns (uint8) {
+        uint8 cardIndex = uint8(uint(keccak256(abi.encodePacked(_seed))) % UNCOMMON_CARD_NUMBER);
+        
+        if(cardIndex <= (UNCOMMON_CARD_INDEX_END_1 - UNCOMMON_CARD_INDEX_START_1 + 1)) {
+            return UNCOMMON_CARD_INDEX_START_1 + cardIndex;
+        } else if(cardIndex <= (UNCOMMON_CARD_INDEX_END_2 - UNCOMMON_CARD_INDEX_START_2 + 1)) {
+            return UNCOMMON_CARD_INDEX_START_2 + cardIndex;
+        } else {
+            return UNCOMMON_CARD_INDEX_3;
+        }
+    }
+        
+    function getRandomCommonCardId(uint256 _seed) private pure returns (uint8) {
+        uint8 cardIndex = uint8(uint(keccak256(abi.encodePacked(_seed))) % COMMON_CARD_NUMBER);
+        
+        if(cardIndex <= (COMMON_CARD_INDEX_END_1 - COMMON_CARD_INDEX_START_1 + 1)) {
+            return COMMON_CARD_INDEX_START_1 + cardIndex;
+        } else if(cardIndex <= (COMMON_CARD_INDEX_END_2 - COMMON_CARD_INDEX_START_2 + 1)) {
+            return COMMON_CARD_INDEX_START_2 + cardIndex;
+        } else {
+            return COMMON_CARD_INDEX_3;
+        }
+    }
+
+    function getRandomEnergyCommonCardId(uint256 _seed) private pure returns (uint8) {
+        return uint8((uint(keccak256(abi.encodePacked(_seed))) % COMMON_ENERGY_CARD_NUMBER) + COMMON_ENERGY_CARD_INDEX_START);
     }
 
     function registerCard(uint256 newTokenId, uint8 _cardIndex) private {
@@ -291,7 +332,7 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
 
     function currentRandomNumber(address addr) internal view returns(uint256) {
         require(currentRandomNumberIndex(addr) > 0, DrawNotStarted());
-        return userBoosters[addr].s_results[currentRandomNumberIndex(addr)-1];
+        return userBoosters[addr].s_results[currentRandomNumberIndex(addr)];
     }
 
     function numberOfUnopenedBoosters(address addr) internal view returns(uint8) {

@@ -54,6 +54,6 @@ module.exports = {
     gasReporter: {
       enabled: false,
       currency: 'USD',
-      coinmarketcap: COINMARKETCAP_API_KEY,
+      coinmarketcap: COINMARKETCAP_API_KEY
     }    
   }
