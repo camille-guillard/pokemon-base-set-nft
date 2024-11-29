@@ -208,8 +208,6 @@ describe("Pokémon Base Set - Pre-sales", function () {
 
     expect(await contract.connect(addr1).numberOfUnopenedBoosters()).to.equal(2);
 
-    console.log(await contract.getCardIds())
-
     // Opening boosters
     for(var i=0; i<2; i++) {
       expect(await contract.connect(addr1).currentRandomNumber()).to.not.equal(0);
