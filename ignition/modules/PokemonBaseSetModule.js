@@ -24,7 +24,7 @@ module.exports = buildModule("PokemonBaseSetModule", (m) => {
   ]
   
 
-  const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis" });
+  const pokemonBaseSetContract = m.contract("PokemonBaseSet", args, { id: "artemis1000" });
 
   return { pokemonBaseSetContract };
 });

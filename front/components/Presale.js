@@ -213,6 +213,12 @@ export default function Presale() {
                 textAlign: "right"
             };
 
+            setInterval(async ()=>{
+                const isRollInProgress = await isRoolInProgress();
+                console.log(isRollInProgress);
+                setRollInProgress(isRollInProgress);
+            }, 5000);
+
             return (
                 <div className="flex flex-col justify-center items-center text-white my-10">
                     <div className="flex justify-around w-full">

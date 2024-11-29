@@ -59,6 +59,10 @@ contract PokemonBaseSetMock is PokemonBaseSet {
         userBoosters[msg.sender].numberOfUnopenedBoosters = _number;
     }
     
+    function getUserBoosters() external view returns(uint256[217] memory) {
+        return userBoosters[msg.sender].s_results;
+    }
+
     function getCardIds() external view returns(uint8[] memory) {
         uint8[] memory memoryArray = new uint8[](totalSupply());
         for(uint i = 0; i < totalSupply(); i++) {

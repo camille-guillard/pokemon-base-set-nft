@@ -107,7 +107,7 @@ export default function Mint() {
                 onError: (error) => console.log(error),
             })
         ).toString()
-        const numberOfUnopenedBoosters = (
+        const numberOfUnopenedBoostersFromContract = (
             await getNumberOfUnopenedBoosters({
                 onError: (error) => console.log(error),
             })
@@ -134,7 +134,7 @@ export default function Mint() {
         ).toString()
         setTotalSupply(totalSupplyFromContract)
         setMaxBooster(maxBoosterFromContract)
-        setNumberOfUnopenedBoosters(numberOfUnopenedBoosters)
+        setNumberOfUnopenedBoosters(numberOfUnopenedBoostersFromContract)
         setRollInProgress(roolInProgressFromContract)
         setPublicSalesStartTime(publicStartTimeFromContract)
         setBoosterPriceFromContract(boosterPriceFromContract)
@@ -188,6 +188,12 @@ export default function Mint() {
             width: "55px",
             textAlign: "right"
         };
+
+        setInterval(async ()=>{
+            const isRollInProgress = (await isRoolInProgress()).toString();
+            console.log(isRollInProgress);
+            setRollInProgress(isRollInProgress)
+        }, 10000);
         
         if (completed) {
             return (

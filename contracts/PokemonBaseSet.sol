@@ -51,11 +51,13 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
     mapping(uint256 => uint8) internal cardIds;
 
     // Number of card per rarity
+    /*
     uint8[] private holoCardIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     uint8[] private rareCardIndex = [16, 17, 18, 19, 20, 21, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78];
     uint8[] private uncommonCardIndex = [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 95];
     uint8[] private commonCardIndex = [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 90, 91, 92, 93, 94, 96];
     uint8[] private commonEnergyCardIndex = [97, 98, 99, 100, 101];
+    */
 
     // Card number by rarity
     uint8 internal constant HOLO_CARD_NUMBER = 16;
@@ -83,7 +85,6 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
     uint8 internal constant COMMON_CARD_INDEX_3 = 96;
     uint8 internal constant COMMON_ENERGY_CARD_INDEX_START = 97;
     uint8 internal constant COMMON_ENERGY_CARD_INDEX_END = 101;
-
 
     // Events
     event PreSaleBuyBooster(uint8 quantity, address indexed buyer);
@@ -229,10 +230,6 @@ contract PokemonBaseSet is ERC721A, VRFConsumerBaseV2Plus {
 
         emit OpenBooster(msg.sender);
     }
-
-    /*function getRandomCardIt(uint8[] storage _cardIndexTable, uint256 _seed) private view returns (uint8) {
-        return _cardIndexTable[uint(keccak256(abi.encodePacked(_seed))) % _cardIndexTable.length];
-    }*/
 
     function getRandomHoloCardId(uint256 _seed) private pure returns (uint8) {
         return uint8(uint(keccak256(abi.encodePacked(_seed))) % HOLO_CARD_NUMBER);
